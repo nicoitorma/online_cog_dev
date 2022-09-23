@@ -1,9 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
 
 import 'package:online_cog/Constants/variable.dart';
 import 'package:online_cog/Constants/widgets.dart';
 import 'package:online_cog/Database/Requests/cog_request.dart';
+import 'package:online_cog/Views/Screens/UserProfile/profile.dart';
 
 class DesktopView extends StatefulWidget {
   const DesktopView({super.key});
@@ -36,7 +38,59 @@ class _DesktopViewState extends State<DesktopView> {
     return Scaffold(
       appBar: myAppBar,
       body: Row(children: [
-        myDrawer,
+        Drawer(
+            backgroundColor: Colors.blue,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  DrawerHeader(
+                    child: Image.asset("lib/assets/images/cict.jpg"),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.feed_outlined,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      "Request COG",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.notifications_outlined,
+                      color: Colors.white,
+                    ),
+                    title: Text("Notifications",
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.person_outline,
+                      color: Colors.white,
+                    ),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Profile())),
+                    title:
+                        Text("Profile", style: TextStyle(color: Colors.white)),
+                  ),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                    ),
+                    title: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () => FlutterFireUIAuth.signOut(),
+                      child: const Text("Sign out",
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ],
+              ),
+            )),
         Expanded(
           child: SingleChildScrollView(
             child: Column(children: [
@@ -223,143 +277,7 @@ class _DesktopViewState extends State<DesktopView> {
                   ),
                 ),
               ),
-              // //Dropdown layouts
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     //department
-              //     Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //           vertical: 20.0, horizontal: 10.0),
-              //       child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: [
-              //           const Text(
-              //             "Department",
-              //             style: TextStyle(fontSize: 18),
-              //           ),
-              //           DropdownButton(
-              //             hint: Text(department),
-              //             // Down Arrow Icon
-              //             icon: const Icon(Icons.keyboard_arrow_down),
-              //             // Array list of items
-              //             items: departmentList.map((String items) {
-              //               return DropdownMenuItem(
-              //                 value: items,
-              //                 child: Text(items),
-              //               );
-              //             }).toList(),
-              //             // After selecting the desired option,it will
-              //             // change button value to selected value
-              //             onChanged: (String? newValue) {
-              //               setState(() {
-              //                 department = newValue!;
-              //               });
-              //             },
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     // Year Level drop down
-              //     Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //           vertical: 20.0, horizontal: 10.0),
-              //       child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: [
-              //           const Text(
-              //             "Year Level",
-              //             style: TextStyle(fontSize: 18),
-              //           ),
-              //           DropdownButton(
-              //             hint: Text(year.toString()),
-              //             // Down Arrow Icon
-              //             icon: const Icon(Icons.keyboard_arrow_down),
-              //             // Array list of items
-              //             items: yearLevel.map((int items) {
-              //               return DropdownMenuItem(
-              //                 value: items,
-              //                 child: Text(items.toString()),
-              //               );
-              //             }).toList(),
-              //             // After selecting the desired option,it will
-              //             // change button value to selected value
-              //             onChanged: (int? newValue) {
-              //               setState(() {
-              //                 year = newValue!;
-              //               });
-              //             },
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     //school year drop down
-              //     Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //           vertical: 15.0, horizontal: 10.0),
-              //       child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         children: [
-              //           const Text(
-              //             "School Year",
-              //             style: TextStyle(fontSize: 18),
-              //           ),
-              //           DropdownButton(
-              //             hint: Text(schoolYear),
-              //             // Down Arrow Icon
-              //             icon: const Icon(Icons.keyboard_arrow_down),
-              //             // Array list of items
-              //             items: schoolYearList.map((String items) {
-              //               return DropdownMenuItem(
-              //                 value: items,
-              //                 child: Text(items),
-              //               );
-              //             }).toList(),
-              //             // After selecting the desired option,it will
-              //             // change button value to selected value
-              //             onChanged: (String? newValue) {
-              //               setState(() {
-              //                 schoolYear = newValue!;
-              //               });
-              //             },
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     //semester drop down
-              //     Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //           vertical: 15.0, horizontal: 10.0),
-              //       child: Column(
-              //         children: [
-              //           const Text(
-              //             "Semester",
-              //             style: TextStyle(fontSize: 18),
-              //           ),
-              //           DropdownButton(
-              //             hint: Text(semester),
-              //             // Down Arrow Icon
-              //             icon: const Icon(Icons.keyboard_arrow_down),
-              //             // Array list of items
-              //             items: semesterList.map((String items) {
-              //               return DropdownMenuItem(
-              //                 value: items,
-              //                 child: Text(items),
-              //               );
-              //             }).toList(),
-              //             // After selecting the desired option,it will
-              //             // change button value to selected value
-              //             onChanged: (String? newValue) {
-              //               setState(() {
-              //                 semester = newValue!;
-              //               });
-              //             },
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ],
-              // ),
+
               ElevatedButton(
                 onPressed: (() async {
                   if (_formKey.currentState!.validate()) {

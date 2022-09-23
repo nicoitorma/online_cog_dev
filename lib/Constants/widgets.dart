@@ -7,52 +7,52 @@ var myAppBar = AppBar(
 );
 
 var myDrawer = Drawer(
-  backgroundColor: Colors.blue,
-  child: Column(
-    children: [
-      const DrawerHeader(
-          child: Icon(
-        Icons.document_scanner_outlined,
-        color: Colors.white,
-      )),
-      const ListTile(
-        leading: Icon(
-          Icons.feed_outlined,
-          color: Colors.white,
-        ),
-        title: Text(
-          "Request COG",
-          style: TextStyle(color: Colors.white),
-        ),
+    backgroundColor: Colors.blue,
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          DrawerHeader(
+            child: Image.asset("lib/assets/images/cict.jpg"),
+          ),
+          const ListTile(
+            leading: Icon(
+              Icons.feed_outlined,
+              color: Colors.white,
+            ),
+            title: Text(
+              "Request COG",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          const ListTile(
+            leading: Icon(
+              Icons.notifications_outlined,
+              color: Colors.white,
+            ),
+            title: Text("Notifications", style: TextStyle(color: Colors.white)),
+          ),
+          const ListTile(
+            leading: Icon(
+              Icons.person_outline,
+              color: Colors.white,
+            ),
+            title: Text("Profile", style: TextStyle(color: Colors.white)),
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            title: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () => FlutterFireUIAuth.signOut(),
+              child:
+                  const Text("Sign out", style: TextStyle(color: Colors.white)),
+            ),
+          ),
+        ],
       ),
-      const ListTile(
-        leading: Icon(
-          Icons.notifications_outlined,
-          color: Colors.white,
-        ),
-        title: Text("Notifications", style: TextStyle(color: Colors.white)),
-      ),
-      const ListTile(
-        leading: Icon(
-          Icons.person_outline,
-          color: Colors.white,
-        ),
-        title: Text("Profile", style: TextStyle(color: Colors.white)),
-      ),
-      ListTile(
-        leading: const Icon(
-          Icons.logout,
-          color: Colors.white,
-        ),
-        title: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () => FlutterFireUIAuth.signOut(),
-          child: const Text("Sign out", style: TextStyle(color: Colors.white)),
-        ),
-      ),
-    ],
-  ),
-);
+    ));
 
 void showAlertDialog(BuildContext context, String title, String? schoolYear,
     String? semester, String? contents) {
