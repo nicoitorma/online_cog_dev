@@ -18,6 +18,7 @@ class Authentication extends StatelessWidget {
         //this will check if there is no signed in user
         if (!snapshot.hasData) {
           return MaterialApp(
+            color: Colors.blue,
             theme: ThemeData(
               /// Decoration for input fields like email, and password in the sign up
               /// and register page

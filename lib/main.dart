@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:online_cog/Accounts/authentication.dart';
@@ -18,12 +19,48 @@ Future<void> main() async {
   } else {
     await Firebase.initializeApp();
   }
+  // Disable persistence on web platforms
+  await FirebaseAuth.instance.setPersistence(Persistence.NONE);
 
-  runApp(const MyApp());
+  runApp(const OnlineCog());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class OnlineCog extends StatefulWidget {
+  const OnlineCog({super.key});
+
+  @override
+  State<OnlineCog> createState() => _OnlineCogState();
+}
+
+class _OnlineCogState extends State<OnlineCog> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.detached:
+        FirebaseAuth.instance.signOut();
+        break;
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.paused:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
