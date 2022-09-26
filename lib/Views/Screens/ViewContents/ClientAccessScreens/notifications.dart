@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:online_cog/Constants/colors.dart';
 import 'package:online_cog/Constants/dimensions.dart';
 import 'package:online_cog/Constants/widgets.dart';
+import 'package:online_cog/Views/Screens/ViewContents/ClientAccessScreens/nav_drawer.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -13,7 +14,6 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -26,9 +26,12 @@ class _NotificationsState extends State<Notifications> {
           ),
           centerTitle: true,
         ),
-        drawer: (screenWidth <= tabletWidth) ? const MyDrawer() : null,
+        drawer:
+            (getScreenWidth(context) <= tabletWidth) ? const MyDrawer() : null,
         body: Row(children: [
-          (screenWidth > tabletWidth) ? const MyDrawer() : Container(),
+          (getScreenWidth(context) > tabletWidth)
+              ? const MyDrawer()
+              : Container(),
           Expanded(
               child: Center(
             child: Text(

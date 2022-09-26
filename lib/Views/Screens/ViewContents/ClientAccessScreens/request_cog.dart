@@ -5,6 +5,7 @@ import 'package:online_cog/Constants/dimensions.dart';
 import 'package:online_cog/Constants/variable.dart';
 import 'package:online_cog/Constants/widgets.dart';
 import 'package:online_cog/Database/Requests/cog_request.dart';
+import 'package:online_cog/Views/Screens/ViewContents/ClientAccessScreens/nav_drawer.dart';
 
 class RequestCog extends StatefulWidget {
   const RequestCog({super.key});
@@ -34,8 +35,6 @@ class _RequestCogState extends State<RequestCog> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
           title: const Text("Request Certificate of Grades",
@@ -45,10 +44,13 @@ class _RequestCogState extends State<RequestCog> {
                 fontFamily: 'Poppins',
               )),
           centerTitle: true),
-      drawer: (screenWidth <= tabletWidth) ? const MyDrawer() : null,
+      drawer:
+          (getScreenWidth(context) <= tabletWidth) ? const MyDrawer() : null,
       body: Row(
         children: [
-          (screenWidth > tabletWidth) ? const MyDrawer() : Container(),
+          (getScreenWidth(context) > tabletWidth)
+              ? const MyDrawer()
+              : Container(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -96,7 +98,7 @@ class _RequestCogState extends State<RequestCog> {
                                       ? 'Enter a valid email'
                                       : null),
                               //Dropdown layouts
-                              (screenWidth <= mobileWidth)
+                              (getScreenWidth(context) <= mobileWidth)
                                   ? Align(
                                       alignment: Alignment.center,
                                       child: Column(

@@ -11,11 +11,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: ResponsiveLayout(
-          mobileView: MobileView(),
-          tabletView: TabletView(),
-          desktopView: DesktopView()),
+          mobileView: MobileView(user: user),
+          tabletView: TabletView(user: user),
+          desktopView: DesktopView(user: user)),
     );
   }
 }

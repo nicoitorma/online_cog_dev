@@ -1,0 +1,1 @@
+var adminSecretKey = '@adminemail.cog';
