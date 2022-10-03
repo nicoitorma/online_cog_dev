@@ -56,8 +56,8 @@ class _RequestsState extends State<Requests> {
                   );
                 }
 
-                return AspectRatio(
-                  aspectRatio: (getScreenWidth(context) < tabletWidth) ? 1 : 4,
+                return Container(
+                  alignment: Alignment.topCenter,
                   child: GridView(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount:

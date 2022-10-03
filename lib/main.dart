@@ -16,11 +16,11 @@ Future<void> main() async {
             appId: appId,
             messagingSenderId: messagingSenderId,
             projectId: projectId));
+    // Disable persistence on web platforms
+    await FirebaseAuth.instance.setPersistence(Persistence.NONE);
   } else {
     await Firebase.initializeApp();
   }
-  // Disable persistence on web platforms
-  await FirebaseAuth.instance.setPersistence(Persistence.NONE);
 
   runApp(const OnlineCog());
 }
